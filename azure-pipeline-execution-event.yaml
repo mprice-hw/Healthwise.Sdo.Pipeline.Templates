@@ -1,0 +1,51 @@
+parameters:
+  - name: timeStamp
+    displayName: TimeStamp
+    type: string
+  - name: teamName
+    displayName: Team Name
+    type: string
+  - name: serviceName
+    displayName: Service Name
+    type: string
+  - name: status
+    displayName: status
+    type: string
+    values:
+      - Started
+      - Completed
+
+jobs:
+  - job: SendPipelineExecutionEvent
+    displayName: Send Pipeline Execution Event
+    pool: server
+    steps:
+      - task: InvokeRESTAPI@1
+        inputs:
+          connectionType: "connectedServiceName"
+          serviceConnection: "https://mp-sdo-proto.servicebus.windows.net/mp-sdo-proto-eventhub/messages"
+          method: "POST"
+          headers: |
+            {
+              "Host": "mp-sdo-proto.servicebus.windows.net",
+              "Content-Type": "application/x-www-form-urlencoded",
+              "Authorization": "$(MP-SDO-PROTO-EVENTHUB-SAS)"          
+            }
+          body: |
+            {
+                "eventSource": "Azure DevOps",
+                "eventType": "PipelineExecutionEvent",
+                "eventId": "$(Build.DefinitionName)-$(runId)",
+                "timestamp": ${{ parameters.timeStamp }}",,
+                "payload": {
+                    "pipelineName": "$(Build.DefinitionName)",
+                    "runId": "$(Build.BuildId)",
+                    "teamName": "${{ parameters.teamName }}",
+                    "serviceName": "${{ parameters.serviceName }}",
+                    "repoName": "$(Build.Repository.Name)",
+                    "branchName": "$(Build.SourceBranchName)",
+                    "commitHash": "$(Build.SourceVersion)",
+                    "status": "${{ parameters.status }}",
+                }
+            }
+          waitForCompletion: "false"
