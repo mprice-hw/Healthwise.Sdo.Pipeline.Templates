@@ -33,12 +33,12 @@ jobs:
             }
           body: |
             {
-                "eventSource": "Azure DevOps",
-                "eventType": "PipelineExecutionEvent",
-                "eventId": "$(Build.DefinitionName)-$(runId)",
+                "source": "Azure DevOps",
+                "type": "PipelineExecutionEvent",
+                "sourceId": "$(Build.DefinitionName)-$(runId)",
                 "timestamp": ${{ parameters.timeStamp }}",,
                 "payload": {
-                    "pipelineName": "$(Build.DefinitionName)",
+                    "name": "$(Build.DefinitionName)",
                     "runId": "$(Build.BuildId)",
                     "teamName": "${{ parameters.teamName }}",
                     "serviceName": "${{ parameters.serviceName }}",
