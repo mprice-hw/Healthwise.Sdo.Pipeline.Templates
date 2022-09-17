@@ -8,6 +8,9 @@ parameters:
   - name: serviceName
     displayName: Service Name
     type: string
+  - name: serviceVersion
+    displayName: Service Version
+    type: string
   - name: status
     displayName: status
     type: string
@@ -42,6 +45,7 @@ jobs:
                     "runId": "$(Build.BuildId)",
                     "teamName": "${{ parameters.teamName }}",
                     "serviceName": "${{ parameters.serviceName }}",
+                    "serviceVersion": "${{ parameters.serviceVersion }}",
                     "repoName": "$(Build.Repository.Name)",
                     "branchName": "$(Build.SourceBranchName)",
                     "commitHash": "$(Build.SourceVersion)",
