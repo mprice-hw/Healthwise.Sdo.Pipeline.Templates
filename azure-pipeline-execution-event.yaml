@@ -39,7 +39,7 @@ jobs:
                 "source": "Azure DevOps",
                 "type": "PipelineExecutionEvent",
                 "sourceId": "$(Build.DefinitionName)-$(runId)",
-                "timestamp": ${{ parameters.timeStamp }}",,
+                "timestamp": "${{ parameters.timeStamp }}",
                 "payload": {
                     "name": "$(Build.DefinitionName)",
                     "runId": "$(Build.BuildId)",
