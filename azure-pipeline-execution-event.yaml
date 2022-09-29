@@ -49,7 +49,7 @@ jobs:
                     "repoName": "$(Build.Repository.Name)",
                     "branchName": "$(Build.SourceBranchName)",
                     "commitHash": "$(Build.SourceVersion)",
-                    "status": "${{ parameters.status }}",
+                    "status": "${{ parameters.status }}"
                 }
             }
           waitForCompletion: "false"
