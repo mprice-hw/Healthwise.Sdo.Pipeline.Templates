@@ -1,6 +1,6 @@
 parameters:
-  - name: timeStamp
-    displayName: TimeStamp
+  - name: timestamp
+    displayName: Timestamp
     type: string
   - name: teamName
     displayName: Team Name
@@ -39,7 +39,7 @@ jobs:
                 "source": "Azure DevOps",
                 "type": "PipelineExecutionEvent",
                 "sourceId": "$(Build.DefinitionName)-$(Build.BuildId)",
-                "timestamp": "${{ parameters.timeStamp }}",
+                "timestamp": "${{ parameters.timestamp }}",
                 "payload": {
                     "name": "$(Build.DefinitionName)",
                     "runId": "$(Build.BuildId)",
