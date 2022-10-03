@@ -11,12 +11,22 @@ parameters:
   - name: serviceVersion
     displayName: Service Version
     type: string
-  - name: status
-    displayName: status
+  - name: state
+    displayName: State
     type: string
     values:
-      - Started
+      - Canceling
       - Completed
+      - InProgress
+      - Unknown
+  - name: result
+    displayName: Result
+    type: string
+    values:
+      - Canceled
+      - Failed
+      - Succeeded
+      - Unknown
 
 jobs:
   - job: SendPipelineExecutionEvent
@@ -49,7 +59,8 @@ jobs:
                     "repoName": "$(Build.Repository.Name)",
                     "branchName": "$(Build.SourceBranchName)",
                     "commitHash": "$(Build.SourceVersion)",
-                    "status": "${{ parameters.status }}"
+                    "state": "${{ parameters.state }}",
+                    "result": "${{ parameters.result }}"
                 }
             }
           waitForCompletion: "false"
