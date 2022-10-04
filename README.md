@@ -1,1 +1,1 @@
-# Healthwise.Sdo.Pipeline.Templates
+# Healthwise.Sdo.Publishers
